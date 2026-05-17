@@ -4,6 +4,7 @@ This section documents the use of targeted search operators (Google Dorking) to 
 
 ##  Search Parameter Breakdown
 
+
 By targeting patterns commonly found in administrative URL structures, it is possible to locate system entry points that have been crawled by commercial search engine bots.
 
 * **Query Syntax:** `inurl: admin login`
@@ -12,7 +13,6 @@ By targeting patterns commonly found in administrative URL structures, it is pos
 1. **`inurl:` (URL Inclusions):** This operator instructs the search engine to filter its entire global index and restrict results exclusively to pages where the specified string patterns appear directly inside the web address (URL).
 2. **`admin login` (Target Strings):** The engine searches for instances where both `admin` and `login` are present in the URL path (e.g., `/admin/login.php`, `/AdminLogin/`, or `/admin_login`).
 
----
 
 ## Findings & Crawl Analysis
 
@@ -22,7 +22,6 @@ Executing this generic query identifies management portals across various public
 * **Metadata Scraped:** The search engine snippets successfully extract structural descriptive text directly from the active forms—including notices like `User Name, *, Password, *, Please send us your email...` or `Admin Dashboard - Login`.
 * **Exposure Risk:** While administrative login panels must exist for backend management, allowing public crawlers to index their explicit locations increases exposure to unauthorized credential-guessing attempts, automated brute-force scripts, or credential-stuffing campaigns.
 
----
 
 ##  Remediation & Defensive Configurations
 
@@ -30,7 +29,8 @@ To restrict public search engines from listing sensitive authentication paths, a
 
 1. **Configure Web Crawlers (`robots.txt`):** Explicitly instruct search engine bots to ignore directories containing login scripts or backend assets. Place the following rules in the site's root directory:
 
-   ```text
+    ```
+text
    User-agent: *
    Disallow: /admin/
    Disallow: /login/
